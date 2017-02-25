@@ -1,4 +1,4 @@
-var numInput, rowStrings, row1, row2, row3, perms, bestPerm,
+var numInput, rowStrings, row1, row2, row3, perms, bestPerm, labels = ['a','b','c'],
     remainingBlocks, tempInput, fullRowSequence, bestBlock, bestBlockMatches, matches;
 
 function findInput() {
@@ -45,7 +45,7 @@ function findInput() {
       }
     }
     if (bestBlock.length == 0) return false;
-    fullRowSequence[bestBlock[0]] = bestBlock[1];
+    fullRowSequence[labels[bestBlock[0]]] = bestBlock[1];
     tempInput = tempInput.slice(bestBlockMatches);
   }
 

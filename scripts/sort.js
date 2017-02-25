@@ -1,36 +1,41 @@
-var blockCount, rowIndex, tempRows, temp, highlight;
+var blockStr, rowStr, i3, a3, b3, temp, highlight;
 
 function sortRows() {
-
   // sort 3-row blocks
-  blockCount = 0;
-  for (var i in fullRowSequence) {
-    if (i != blockCount) {
-      swapBlocks(i,blockCount);
+  blockStr = '';
+  for (var i in fullRowSequence) blockStr += i;
 
-      tempRows = fullRowSequence[i];
-      fullRowSequence[i] = fullRowSequence[blockCount] || [0,1,2];
-      fullRowSequence[blockCount] = tempRows;
-    }
-    blockCount++;
+  if (blockStr == 'acb' || blockStr == 'ac')
+    swapBlocks(1,2);
+  else if (blockStr == 'bac' || blockStr == 'ba' || blockStr == 'b')
+    swapBlocks(0,1);
+  else if (blockStr == 'cba' || blockStr == 'cb' || blockStr == 'c')
+    swapBlocks(0,2);
+  else if (blockStr == 'bca' || blockStr == 'bc') {
+    swapBlocks(0,1);
+    swapBlocks(1,2);
+  } else if (blockStr == 'cab' || blockStr == 'ca') {
+    swapBlocks(2,0);
+    swapBlocks(1,2);
   }
 
   // sort rows within blocks
   for (var i in fullRowSequence) {
-    str = fullRowSequence[i].join('');
+    i3 = blockStr.indexOf(i)*3;
+    rowStr = fullRowSequence[i].join('');
 
-    if (str == '021')
-      swapRows(3*i+1,3*i+2);
-    else if (str == '102')
-      swapRows(3*i,3*i+1);
-    else if (str == '210')
-      swapRows(3*i+2,3*i);
-    else if (str == '120') {
-      swapRows(3*i,3*i+1);
-      swapRows(3*i+1,3*i+2);
-    } else if (str == '201') {
-      swapRows(3*i+2,3*i+0);
-      swapRows(3*i+1,3*i+2);
+    if (rowStr == '021')
+      swapRows(i3+1,i3+2);
+    else if (rowStr == '102')
+      swapRows(i3,i3+1);
+    else if (rowStr == '210')
+      swapRows(i3+2,i3);
+    else if (rowStr == '120') {
+      swapRows(i3,i3+1);
+      swapRows(i3+1,i3+2);
+    } else if (rowStr == '201') {
+      swapRows(i3+2,i3+0);
+      swapRows(i3+1,i3+2);
     }
   }
 
@@ -39,8 +44,10 @@ function sortRows() {
 
 
 function swapBlocks( a , b ) {
+  a3 = a*3;
+  b3 = b*3;
   for (var i=0; i<3; i++)
-    swapRows(3*a+i,3*b+i);
+    swapRows(a3+i,b3+i);
 }
 
 

@@ -1,0 +1,38 @@
+#grid-container {
+  width: 450px;
+  height: 450px;
+}
+
+#grid {
+  width: 100%;
+  height: 100%;
+  border: 2px solid;
+  border-collapse: collapse;
+}
+
+#grid table {
+  table-layout: fixed;
+  border: 1px solid;
+  border-collapse: collapse;
+  margin: -1px;
+  width: 150px;
+  height: 150px;
+}
+
+#grid table td {
+  border: 1px solid;
+  overflow: hidden;
+}
+
+.box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  font-size: 32px;
+  line-height: 48px;
+}
+
+button {
+  margin-top: 20px;
+}

@@ -6,18 +6,29 @@
   <meta name='viewport' content='width=device-width, initial-scale=1'>
 </head>
 
-<body>
-  <main>
-    <div id='grid-container'></div>
+<body onload='drawBackground(2); reset();'>
+  <canvas id='bg-2' width='1280' height='800'></canvas>
 
-    <span>Input&#58;</span>
-    <input value='IAN PHILIP GENT'>
-    <button id='generate'>Generate</button>
-    <button id='simplify'>Simplify</button>
+  <div id=container>
+    <main>
+      <h1>Sudoku Spelling</h1>
+      <p>Type your message in the box below</br>and turn it into a solvable sudoku puzzle!</p>
+      <input value='Alastair Stanley'>
+      <button id='generate'>Generate</button>
+      <button id='simplify'>Simplify</button>
 
-  </main>
+      <div id='grid-container'></div>
+
+      <nav>
+        <a id='home' href='/index.html'>&lt; Home</a>
+        <p>|</p>
+        <a id='how-to' href='how-to.html'>How it works &gt;</a>
+      </nav>
+    </main>
+  </div>
 </body>
 
+<link rel='stylesheet' href='/core.css'>
 <link rel='stylesheet' href='style.css'>
 <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
 <script src='scripts/parse.js'></script>
@@ -26,4 +37,5 @@
 <script src='scripts/solve.js'></script>
 <script src='scripts/find.js'></script>
 <script src='scripts/sort.js'></script>
+<script src='/backgrounds.js'></script>
 </html>

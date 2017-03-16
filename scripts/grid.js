@@ -1,7 +1,9 @@
-var tableHTML, index, grid, shifted = false, alted = false;
+var tableHTML, index, grid;
 
+// ––––––––––––––––––––––––––––––––––––––––––––––––––
+// generate the HTML for the sudoku grid
+// ––––––––––––––––––––––––––––––––––––––––––––––––––
 $(function(){
-  alert('Update: now displays the input sentence in readable order');
   tableHTML = "<table id='grid'>";
   for (var row=0; row<3; row++) {
     tableHTML += '<tr>';
@@ -11,7 +13,6 @@ $(function(){
         tableHTML += '<tr>';
         for (var blockCol=0; blockCol<3; blockCol++) {
           index = blockCol + 3*col + 9*blockRow + 27*row;
-
           tableHTML += "<td><div id='box" + index + "' class='box' contenteditable></div></td>";
         }
         tableHTML += '</tr>';

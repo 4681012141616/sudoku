@@ -61,3 +61,14 @@ function _(x) { return Math.floor(x); }
 function clearGrid() {
   for (var i=0; i<81; i++) $(grid[i]).text('');
 }
+
+
+// ––––––––––––––––––––––––––––––––––––––––––––––––––
+// flash grid red: no solution
+// ––––––––––––––––––––––––––––––––––––––––––––––––––
+function noSolution() {
+  $('#grid, #grid table td').attr('class','');
+  setTimeout(function(){
+    $('#grid, #grid table td').attr('class','flash-red');
+  },0);
+}

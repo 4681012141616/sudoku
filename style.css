@@ -46,3 +46,11 @@ button {
   justify-content: center;
   font-size: 4vw;
 }
+
+.flash-red { animation: flash-red 3s; }
+
+@keyframes flash-red {
+  0%   { border-color: red; }
+  50%  { border-color: #500; }
+  100% { border-color: black; }
+}

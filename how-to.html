@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>How To – Sudoku</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body onload="drawBackground(2);">
+  <canvas id="bg-2" width="1280" height="800"></canvas>
+
+  <div id=container>
+    <main>
+      <h1>Sudoku Spelling</h1>
+      <p>How it Works</p>
+
+      <div class="how-to">
+        <h2>Generating the Puzzle</h2>
+        <p>Take the input "Alastair Stanley" as an example. It has 9 unique letters – A, E, I, L, N, R, S, T, Y – which is perfect for a sudoku puzzle (if it had fewer, the set would be completed with random letters).</p>
+        <p>First, the grid is completely filled with clues: one of each letter per row, column and 3x3 block. Then any clues that can be immediately deduced from the others is deleted. A count is kept of how many of each letter have been deleted to make sure there are enough to recreate the input message. There are four A's in the input, which means we can delete up to five A's from the filled grid (9&nbsp;=&nbsp;4&nbsp;+&nbsp;5). This method usually reduces the number of clues from 81 to 25-30.</p>
+        <p>A second round of deletions uses a more brute-force approach, deleting a clue and then checking if the puzzle is still soluble. This takes care of clues that can only be deduced from the others in more than one logical step, usually leaving 20-25 clues. After this round, the puzzle is minimal for a step-by-step solve. Further deletion may still leave a unique solution, but it could not be found without complex reasoning or guessing.</p>
+
+        <h2>Highlighting the Message</h2>
+        <p>The message is actually highlighted between the two rounds of deletion: after the one-step deductions but before the brute-force checks.</p>
+        <p>It is guaranteed that there are enough letters remaining in the grid after the first round to recreate the input, but they may not be in the right order. The grid is also initialised with the same pattern every time (only the symbols change). To find the message in order, and to make the puzzle more interesting, different row permutations are considered.</p>
+        <p>Permuting the three main 3x9 blocks does not affect the validity of the sudoku, nor does permuting the rows within a block. For each block, all 6 row permutations are checked for the longest match with the head of the input message and the best 3x9 block is shuffled to the top of the grid in its best permutation. The other two blocks are then checked for the longest continuation of the input and swapped if needed, then the last block is permuted to try to finish the message. The entire message may not found, even if it exists, but generating the puzzle and the operations to this point are inexpensive and can be repeated (hundreds of times per second) until it is found. Column permutations could also be considered, but would increase the number of operations considerably for an unneccessary increase in success probability.</p>
+        <p>Once the message has been found, the relevant cells are highlighted and the unused clues are run through the second round of deletions.</p>
+
+        <h2>Simplify</h2>
+        <p>The "Simplify" button simply triggers the reverse operation to the initial deletion round. Each empty cell's possible values are stored, then each existing clue is removed from the possible values of every cell in its row, column or 3x3 block. The cells with only one remaining possibility are filled in, as well as any cell that is the only place for a certain letter in its row, column or block. There will always be at least one cell to fill this way because of the way the puzzle was generated.</p>
+        <p>This operation essentially completes one logical step in the solution of the sudoku. Applying it multiple times will solve the puzzle completely.</p>
+
+        <h2>Length of Code</h2>
+        <p>The JavaScript for Sudoku Spelling is arranged in very distinct blocks, working in sequence but independently. Parsing the input and creating number-letter hash maps, generating and styling the grid, finding the message in the puzzle, and sorting the rows each take around 80 lines of code. Solving the puzzle (validity checks and simplifying) takes just over 100 lines, and generating the puzzle from a filled grid takes almost 200.</p>
+        <p>There are about 50 lines each of HTML and CSS.</p>
+      </div>
+    </main>
+
+    <nav>
+      <a href="/index.html">&lt;&lt; Home</a>
+      <p>|</p>
+      <a href="index.html">&lt; Back to Sudoku Spelling</a>
+    </nav>
+  </div>
+</body>
+
+<script src="/backgrounds.js"></script>
+<link rel="stylesheet" href="/core.css">
+</html>
